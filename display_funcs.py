@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 from src.vis_utils import visualize_grid
 
-def save_net_weights(net, ids, name):
+def save_net_weights(net, name):
     ext = '.png'
-    W1 = net.params['W1'][:,ids]
+    W1 = net.params['W1']
     W1 = W1.reshape(3, 32, 32, -1).transpose(3, 1, 2, 0)
     plt.imshow(visualize_grid(W1, padding=3).astype('uint8'))
     plt.gca().axis('off')
