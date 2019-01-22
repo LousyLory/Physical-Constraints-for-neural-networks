@@ -18,6 +18,24 @@ def rel_error(x, y):
 ########################################################################################
 
 ########################################################################################
+def plot_train_loss(solver1, plot_name):
+    plt.subplot(2, 1, 1)
+    plt.title('Training loss')
+    plt.plot(solver1.loss_history, 'o')
+    plt.xlabel('Iteration')
+    
+    plt.subplot(2, 1, 2)
+    plt.title('Accuracy')
+    plt.plot(solver1.train_acc_history, '-o', label='train')
+    plt.plot(solver1.val_acc_history, '-o', label='val')
+    plt.plot([0.5] * len(solver1.val_acc_history), 'k--')
+    plt.xlabel('Epoch')
+    plt.legend(loc='lower right')
+    plt.gcf().set_size_inches(15, 12)
+    plt.savefig('outputs/'+plot_name+'.png')
+########################################################################################
+
+########################################################################################
 # Load the (preprocessed) CIFAR10 data.
 
 data = get_CIFAR10_data()
@@ -29,15 +47,16 @@ for k, v in data.iteritems():
 X_train = data['X_train']
 y_train = data['y_train']
 
+'''
 total_train_size = X_train.shape[0]
 full_indices = np.random.permutation(total_train_size)
 
 mask1 = range(total_train_size)
 X_train1 = X_train[full_indices[mask1]]
 y_train1 = y_train[full_indices[mask1]]
-
+'''
 data1 = {
-        'X_train': X_train1, 'y_train' : y_train1,
+        'X_train': X_train, 'y_train' : y_train,
         'X_val': data['X_val'], 'y_val' : data['y_val'],
         'X_test': data['X_test'], 'y_test' : data['y_test'],
         }
@@ -65,20 +84,6 @@ pass
 ########################################################################################
 
 ########################################################################################
-# Run this cell to visualize training loss and train / val accuracy
-
-plt.subplot(2, 1, 1)
-plt.title('Training loss')
-plt.plot(solver1.loss_history, 'o')
-plt.xlabel('Iteration')
-
-plt.subplot(2, 1, 2)
-plt.title('Accuracy')
-plt.plot(solver1.train_acc_history, '-o', label='train')
-plt.plot(solver1.val_acc_history, '-o', label='val')
-plt.plot([0.5] * len(solver1.val_acc_history), 'k--')
-plt.xlabel('Epoch')
-plt.legend(loc='lower right')
-plt.gcf().set_size_inches(15, 12)
-plt.savefig('train_accuracy_plot.png')
+# plot stuff
+plot_train_loss(solver1, 'train_accuracy_plot')
 ########################################################################################
