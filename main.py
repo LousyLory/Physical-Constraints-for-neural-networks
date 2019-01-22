@@ -58,5 +58,5 @@ pass
 ########################################################################################
 # plot stuff
 plot_train_loss(solver1, 'train_accuracy_plot')
-save_net_weights(model1, 'model1')
+save_net_weights(model1, 'model1_default')
 ########################################################################################
