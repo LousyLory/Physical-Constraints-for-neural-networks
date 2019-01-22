@@ -13,6 +13,7 @@ plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
 
 ########################################################################################
+# define relatie error
 def rel_error(x, y):
     """ returns relative error """
     return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
@@ -26,6 +27,7 @@ for k, v in data.iteritems():
 ########################################################################################
 
 ########################################################################################
+# format data accordingly
 X_train = data['X_train']
 y_train = data['y_train']
 
@@ -37,15 +39,12 @@ data1 = {
 ########################################################################################
 
 ########################################################################################
-################################################################################
-# TODO: Train the best FullyConnectedNet that you can on CIFAR-10. You might   #
-# batch normalization and dropout useful. Store your best model in the         #
-# best_model variable.                                                         #
-################################################################################
+# finally train the model here
 # here I use the same parameters I got before, seems like they perform moderately fine
-model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, reg=0.6)
+model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
+                                                            reg=0.6, mixing_param=0.5)
 solver1 = Solver(model1, data1,
-                        print_every=data1['X_train'].shape[0], num_epochs=50, batch_size=100,
+                        print_every=data1['X_train'].shape[0], num_epochs=100, batch_size=100,
                         update_rule='sgd',
                         optim_config={
                           'learning_rate': 0.03,
@@ -57,6 +56,6 @@ pass
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot')
-save_net_weights(model1, 'model1_default')
+plot_train_loss(solver1, 'train_accuracy_plot_modified')
+save_net_weights(model1, 'model1_modified')
 ########################################################################################

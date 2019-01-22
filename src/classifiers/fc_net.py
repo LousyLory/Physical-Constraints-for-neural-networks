@@ -181,7 +181,7 @@ class FullyConnectedNet(object):
 
   def __init__(self, hidden_dims, input_dim=3*32*32, num_classes=10,
                dropout=0, use_batchnorm=False, reg=0.0,
-               weight_scale=1e-2, dtype=np.float32, seed=None):
+               weight_scale=1e-2, dtype=np.float32, seed=None, mixing_param=0.0):
     """
     Initialize a new FullyConnectedNet.
 
@@ -208,6 +208,12 @@ class FullyConnectedNet(object):
     self.num_layers = 1 + len(hidden_dims)
     self.dtype = dtype
     self.params = {}
+    # process for spatial constrains
+    cx, cy = np.mgrid[-np.sqrt(hidden_dims[0])/2:np.sqrt(hidden_dims[0])/2:1, \
+                        -np.sqrt(hidden_dims[0])/2:np.sqrt(hidden_dims[0])/2:1]
+    L1_dist_mat = cx+cy
+    self.L1_arr = np.asarray(L1_dist_mat).reshape(-1)
+    self.mixing_param = mixing_param
 
     ############################################################################
     # TODO: Initialize the parameters of the network, storing all values in    #
@@ -318,6 +324,11 @@ class FullyConnectedNet(object):
             if self.use_dropout:
                 x, cache[DP_name] = dropout_forward(x, self.dropout_param)
             out2, cache[CA_name] = affine_forward(x, self.params[W_name], self.params[b_name])
+            ##################################################################################
+            #  adding spatial constraint 
+            if W_name == 'W1':
+                out2 += self.mixing_param*self.L1_arr
+            ##################################################################################
             reg_loss += 0.5*self.reg*np.sum(self.params[W_name]*self.params[W_name])
             if self.use_batchnorm:
                 out2, cache[BN_name] = batchnorm_forward(out2, self.params[g_name], \
