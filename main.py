@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 from src.classifiers.fc_net import *
 from src.data_utils import get_CIFAR10_data
 from src.gradient_check import eval_numerical_gradient, eval_numerical_gradient_array
@@ -41,10 +42,11 @@ data1 = {
 ########################################################################################
 # finally train the model here
 # here I use the same parameters I got before, seems like they perform moderately fine
+mp = float(sys.argv[1])
 model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
-                                                            reg=0.6, mixing_param=0.5)
+                                                            reg=0.6, mixing_param=mp)
 solver1 = Solver(model1, data1,
-                        print_every=data1['X_train'].shape[0], num_epochs=100, batch_size=100,
+                        print_every=data1['X_train'].shape[0], num_epochs=50, batch_size=100,
                         update_rule='sgd',
                         optim_config={
                           'learning_rate': 0.03,
@@ -56,6 +58,6 @@ pass
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot_modified')
-save_net_weights(model1, 'model1_modified')
+plot_train_loss(solver1, 'train_accuracy_plot_modified_'+str(mp))
+save_net_weights(model1, 'model1_modified_'+str(mp))
 ########################################################################################

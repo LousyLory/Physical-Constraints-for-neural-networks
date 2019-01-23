@@ -327,7 +327,9 @@ class FullyConnectedNet(object):
             ##################################################################################
             #  adding spatial constraint 
             if W_name == 'W1':
+                #out2 = (1-self.mixing_param)*out2 + self.mixing_param*self.L1_arr
                 out2 += self.mixing_param*self.L1_arr
+                pass
             ##################################################################################
             reg_loss += 0.5*self.reg*np.sum(self.params[W_name]*self.params[W_name])
             if self.use_batchnorm:
