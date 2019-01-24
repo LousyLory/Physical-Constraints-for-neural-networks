@@ -46,7 +46,7 @@ mp = float(sys.argv[1])
 model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
                                                             reg=0.6, mixing_param=mp)
 solver1 = Solver(model1, data1,
-                        print_every=data1['X_train'].shape[0], num_epochs=50, batch_size=100,
+                        print_every=data1['X_train'].shape[0], num_epochs=100, batch_size=100,
                         update_rule='sgd',
                         optim_config={
                           'learning_rate': 0.03,
