@@ -213,6 +213,9 @@ class FullyConnectedNet(object):
                         -np.sqrt(hidden_dims[0])/2:np.sqrt(hidden_dims[0])/2:1]
     L1_dist_mat = cx+cy
     self.L1_arr = np.asarray(L1_dist_mat).reshape(-1)
+    cx2, cy2 = np.power(cx,2), np.power(cy,2)
+    L2_dist_mat = np.sqrt(cx2+cy2)
+    self.L2_arr = np.asarray(L2_dist_mat).reshape(-1)
     self.mixing_param = mixing_param
 
     ############################################################################
@@ -328,7 +331,7 @@ class FullyConnectedNet(object):
             #  adding spatial constraint 
             if W_name == 'W1':
                 #out2 = (1-self.mixing_param)*out2 + self.mixing_param*self.L1_arr
-                out2 += self.mixing_param*self.L1_arr
+                out2 += self.mixing_param*self.L2_arr
                 pass
             ##################################################################################
             reg_loss += 0.5*self.reg*np.sum(self.params[W_name]*self.params[W_name])
