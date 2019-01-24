@@ -59,6 +59,6 @@ pass
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot_modified_l2_'+str(mp))
-save_net_weights(model1, 'model1_modified_l2_'+str(mp))
+plot_train_loss(solver1, 'train_accuracy_plot_modified_'+str(mp))
+save_net_weights(model1, 'model1_modified_'+str(mp))
 ########################################################################################
