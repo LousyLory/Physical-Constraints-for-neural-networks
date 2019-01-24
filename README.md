@@ -27,7 +27,7 @@ $f(x,W,b) = x'*W' + b.$
 
 The fully connected weights of a trained network is shown below. Notice the almost duplicate filters. This occurs because the network is over-parameterized. 
 
-![image1](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/model1_modified_0.0w1.png)
+![image1](https://github.com/lousylory/physical_constraints_nn/blob/master/all_outputs/model1_modified_0.0w1.png)
 
 The training and loss plots are shown below:
 
