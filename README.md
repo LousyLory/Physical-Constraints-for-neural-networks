@@ -31,7 +31,7 @@ The fully connected weights of a trained network is shown below. Notice the almo
 
 The training and loss plots are shown below:
 
-![image2](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/train_accuracy_plot_modified_0.0.png)
+![image2](./all_outputs/train_accuracy_plot_modified_0.0.png)
 
 ----
 
@@ -45,24 +45,24 @@ $f(x,W,b) = x'*W' + b + \alpha * L_1,$
 
 where $\alpha \in [0,1]$. Thus only the forward pass is affected. The results for comparison are:
 
-1. For $\alpha$ == 0.5, the network starts to show a bias towards regional learning. Although one might notice the introduction of some random filter weights. The resultant fully connected filters are: ![image3](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/model1_modified_0.5w1.png)
+1. For $\alpha$ == 0.5, the network starts to show a bias towards regional learning. Although one might notice the introduction of some random filter weights. The resultant fully connected filters are: ![image3](./all_outputs/model1_modified_0.5w1.png)
 
-2. For $\alpha$ == 0.9, the network shows strong bias towards regional grouping of filters. The number of random filter weights have increased considerably. The resultant fully connected filters are: ![image4](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/model1_modified_0.9w1.png)
+2. For $\alpha$ == 0.9, the network shows strong bias towards regional grouping of filters. The number of random filter weights have increased considerably. The resultant fully connected filters are: ![image4](./all_outputs/model1_modified_0.9w1.png)
 
 The plots for training and validation for each (1 and 2) are shown in the following figure respectively:
 
-1. ![image5](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/train_accuracy_plot_modified_0.5.png)
+1. ![image5](./all_outputs/train_accuracy_plot_modified_0.5.png)
 
-2. ![image6](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/train_accuracy_plot_modified_0.9.png)
+2. ![image6](./all_outputs/train_accuracy_plot_modified_0.9.png)
 
 (b) Here we switch the distance function from $L_1$ to $L_2$ (Euclidean). The results isn't tat interesting as we can see that the zonal clustering of the filters do not exist. Results for different mixing parameters are shown below:
 
-1. Using $\alpha == 0.5$: ![image7](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/model1_modified_l2_0.5w1.png)
+1. Using $\alpha == 0.5$: ![image7](./all_outputs/model1_modified_l2_0.5w1.png)
 
-2. Using $\alpha == 0.9$: ![image8](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/model1_modified_l2_0.9w1.png)
+2. Using $\alpha == 0.9$: ![image8](./all_outputs/model1_modified_l2_0.9w1.png)
 
 Train and Loss plots for the above are shown below:
 
-1. ![image9](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/train_accuracy_plot_modified_l2_0.5.png)
+1. ![image9](./all_outputs/train_accuracy_plot_modified_l2_0.5.png)
 
-2. ![image10](https://github.com/LousyLory/Physical_Constraints_NN/blob/master/all_outputs/train_accuracy_plot_modified_l2_0.9.png)
+2. ![image10](./all_outputs/train_accuracy_plot_modified_l2_0.9.png)
