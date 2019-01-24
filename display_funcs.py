@@ -8,8 +8,8 @@ def save_net_weights(net, name):
     W1 = W1.reshape(3, 32, 32, -1).transpose(3, 1, 2, 0)
     plt.imshow(visualize_grid(W1, padding=3).astype('uint8'))
     plt.gca().axis('off')
-    plt.savefig('outputs/'+name+'W1'+ext, dpi=300)
-    plt.savefig('outputs/'+name+'W1'+'.png', dpi=300)
+    plt.savefig('outputs/'+name+'w1'+ext, dpi=300)
+    plt.savefig('outputs/'+name+'w1'+'.png', dpi=300)
     plt.clf()
     #plt.savefig('')
 
@@ -17,8 +17,8 @@ def save_net_weights(net, name):
     W2 = W2.reshape(1, 10, 10, -1).transpose(3, 1, 2, 0)
     plt.imshow(np.squeeze(visualize_grid(W2, padding=3)).astype('uint8'))
     plt.gca().axis('off')
-    plt.savefig('outputs/'+name+'W2'+ext, dpi=300)
-    plt.savefig('outputs/'+name+'W2'+'.png', dpi=300)
+    plt.savefig('outputs/'+name+'w2'+ext, dpi=300)
+    plt.savefig('outputs/'+name+'w2'+'.png', dpi=300)
     plt.clf()
     return None
 

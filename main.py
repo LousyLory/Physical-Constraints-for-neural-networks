@@ -42,6 +42,7 @@ data1 = {
 ########################################################################################
 # finally train the model here
 # here I use the same parameters I got before, seems like they perform moderately fine
+# also this network employs fc net with spatial constraint
 mp = float(sys.argv[1])
 model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
                                                             reg=0.6, mixing_param=mp)
@@ -58,6 +59,6 @@ pass
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot_modified_L2_'+str(mp))
-save_net_weights(model1, 'model1_modified_L2_'+str(mp))
+plot_train_loss(solver1, 'train_accuracy_plot_modified_l2_'+str(mp))
+save_net_weights(model1, 'model1_modified_l2_'+str(mp))
 ########################################################################################
