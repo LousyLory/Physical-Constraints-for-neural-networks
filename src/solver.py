@@ -170,7 +170,26 @@ class Solver(object):
 			dw = grads[p]
 			config = self.optim_configs[p]
 			next_w, next_config = self.update_rule(w, dw, config)
-			self.model.params[p] = next_w
+			if p=='W1':
+				# w's shape is img_to_vec x hidden_layer_size
+				if self.model.correlate_update:
+					q = self.model.correlate_vector
+					v = np.copy(q)
+					for i in range(w.shape[1]):
+						v[i] = np.correlate(w[:,i], next_w[:,i])
+						#print v[i]
+					check = q > np.abs(v)
+					self.model.correlate_vector -= np.abs(v)
+					self.model.correlate_vector[self.model.correlate_vector<0] = 0
+
+					for i in range(w.shape[1]):
+						if check[i] == False:
+							print "no update"
+						next_w[:,i] = next_w[:,i]*int(check[i])
+
+				self.model.params[p] = next_w
+			else:
+				self.model.params[p] = next_w
 			self.optim_configs[p] = next_config
 
 
@@ -244,6 +263,10 @@ class Solver(object):
 			first_it = (t == 0)
 			last_it = (t == num_iterations + 1)
 			if first_it or last_it or epoch_end:
+				if self.model.correlate_update:
+					# reset correlation vector
+					self.model.correlate_vector = self.model.corr_multipier*np.ones(100)
+
 				train_acc = self.check_accuracy(self.X_train, self.y_train,
 																				num_samples=1000)
 				val_acc = self.check_accuracy(self.X_val, self.y_val)

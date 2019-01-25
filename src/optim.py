@@ -42,7 +42,7 @@ def sgd(w, dw, config=None):
 
   w -= config['learning_rate'] * dw
   return w, config
-
+  
 
 def sgd_momentum(w, dw, config=None):
   """

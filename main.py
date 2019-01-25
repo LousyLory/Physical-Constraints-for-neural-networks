@@ -16,15 +16,15 @@ plt.rcParams['image.cmap'] = 'gray'
 ########################################################################################
 # define relatie error
 def rel_error(x, y):
-    """ returns relative error """
-    return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
+	""" returns relative error """
+	return np.max(np.abs(x - y) / (np.maximum(1e-8, np.abs(x) + np.abs(y))))
 ########################################################################################
 
 ########################################################################################
 # Load the (preprocessed) CIFAR10 data.
 data = get_CIFAR10_data()
 for k, v in data.iteritems():
-    print '%s: ' % k, v.shape
+	print '%s: ' % k, v.shape
 ########################################################################################
 
 ########################################################################################
@@ -33,10 +33,10 @@ X_train = data['X_train']
 y_train = data['y_train']
 
 data1 = {
-        'X_train': X_train, 'y_train' : y_train,
-        'X_val': data['X_val'], 'y_val' : data['y_val'],
-        'X_test': data['X_test'], 'y_test' : data['y_test'],
-        }
+		'X_train': X_train, 'y_train' : y_train,
+		'X_val': data['X_val'], 'y_val' : data['y_val'],
+		'X_test': data['X_test'], 'y_test' : data['y_test'],
+		}
 ########################################################################################
 
 ########################################################################################
@@ -45,20 +45,22 @@ data1 = {
 # also this network employs fc net with spatial constraint
 mp = float(sys.argv[1])
 model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
-                                                            reg=0.6, mixing_param=mp)
+									reg=0.6, spatial_update=False, \
+									spatial_update_type='L1', mixing_param=mp,\
+									correlate_update=True)
 solver1 = Solver(model1, data1,
-                        print_every=data1['X_train'].shape[0], num_epochs=100, batch_size=100,
-                        update_rule='sgd',
-                        optim_config={
-                          'learning_rate': 0.03,
-                        },verbose=True, lr_decay = 0.9,
-                 )
+						print_every=data1['X_train'].shape[0], num_epochs=50, batch_size=100,
+						update_rule='sgd',
+						optim_config={
+						  'learning_rate': 0.03,
+						},verbose=True, lr_decay = 0.9,
+				 )
 solver1.train()
 pass
 ########################################################################################
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot_modified_l2_'+str(mp))
-save_net_weights(model1, 'model1_modified_l2_'+str(mp))
+plot_train_loss(solver1, 'train_accuracy_plot_modified_xx_'+str(mp))
+save_net_weights(model1, 'model1_modified_xx_'+str(mp))
 ########################################################################################
