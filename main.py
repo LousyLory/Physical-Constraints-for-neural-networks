@@ -45,7 +45,7 @@ data1 = {
 # also this network employs fc net with spatial constraint
 mp = float(sys.argv[1])
 model1 = FullyConnectedNet([100, 100], weight_scale=0.003, use_batchnorm = False, \
-									reg=0.6, spatial_update=False, \
+									reg=0.6, spatial_update=True, \
 									spatial_update_type='L1', mixing_param=mp,\
 									correlate_update=True)
 solver1 = Solver(model1, data1,
@@ -61,6 +61,6 @@ pass
 
 ########################################################################################
 # plot stuff
-plot_train_loss(solver1, 'train_accuracy_plot_modified_xx_'+str(mp))
-save_net_weights(model1, 'model1_modified_xx_'+str(mp))
+plot_train_loss(solver1, 'train_accuracy_plot_modified_L1_xx_'+str(mp))
+save_net_weights(model1, 'model1_modified_L1_xx_'+str(mp))
 ########################################################################################
